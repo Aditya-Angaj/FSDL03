@@ -1,0 +1,64 @@
+/* Basic Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header Styling */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+}
+
+/* Pseudo-element - ::before to add content before header */
+header h1::before {
+    content: "👋 "; /* Adds a waving hand emoji before the heading */
+}
+
+/* Section Styling */
+section {
+    padding: 20px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Pseudo-element - ::after to add content after paragraphs */
+p::after {
+    content: " - Stay curious!"; /* Adds text after all paragraphs */
+    color: #555;
+    font-style: italic;
+}
+
+/* Hover Effect - Pseudo-class :hover */
+.hover-effect:hover {
+    color: #ff5722;
+    cursor: pointer;
+}
+
+/* Pseudo-class :first-child to style the first paragraph */
+section p:first-child {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Pseudo-class :nth-child for selecting odd sections */
+section:nth-child(odd) {
+    background-color: #e8f5e9; /* Light green background for odd sections */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
