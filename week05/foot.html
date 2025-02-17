@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Calculate Your Carbon Footprint</h1>
+            <p>Understand how your actions impact the environment and take steps toward a greener future.</p>
+            <button onclick="scrollToForm()">Start Calculation</button>
+        </div>
+    </section>
+
+    <!-- Input Form -->
+    <section id="calculator" class="calculator-section">
+        <h2>Enter Your Details</h2>
+        <form id="footprint-form">
+            <div class="form-group">
+                <label for="electricity">Monthly electricity consumption (kWh):</label>
+                <input type="number" id="electricity" placeholder="Enter kWh" required>
+                <img src="https://i.pinimg.com/736x/95/12/a9/9512a9ea0ec6ee9fcfac0d14b05fcdfa.jpg" alt="Electricity Icon" class="icon">
+            </div>
+            <div class="form-group">
+                <label for="mileage">Monthly car mileage (km):</label>
+                <input type="number" id="mileage" placeholder="Enter km" required>
+                <img src="https://stimg.cardekho.com/images/carexteriorimages/630x420/Skoda/Kylaq/11528/1733225175669/front-left-side-47.jpg?impolicy=resize&imwidth=480" alt="Car Icon" class="icon">
+            </div>
+            <div class="form-group">
+                <label for="flights">Number of flights per year:</label>
+                <input type="number" id="flights" placeholder="Enter number of flights" required>
+                <img src="https://www.freeiconspng.com/thumbs/airplane-icon-png/airplane-icon---item-2--vector-magz--free-download-vector-graphics-4.png" alt="Airplane Icon" class="icon">
+            </div>
+            <button type="button" onclick="calculateFootprint()">Calculate Now</button>
+        </form>
+    </section>
+
+    <!-- Result Section -->
+    <section id="result" class="result-section" style="display: none;">
+        <h2>Your Carbon Footprint</h2>
+        <p>Your estimated carbon footprint is <strong id="total-footprint">0</strong> kg of CO2 per month.</p>
+        <div id="breakdown">
+            <!-- Breakdown of footprint will be displayed here -->
+        </div>
+        <button onclick="restartCalculator()">Start Over</button>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <p>Learn more about how you can reduce your carbon footprint.</p>
+            <ul>
+                <li><a href="https://www.solarpower.com" target="_blank">Solar Energy</a></li>
+                <li><a href="https://www.electricvehicles.com" target="_blank">Electric Vehicles</a></li>
+            </ul>
+            <div class="social-media">
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+                <a href="https://facebook.com" target="_blank">Facebook</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

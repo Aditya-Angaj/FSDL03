@@ -1,0 +1,129 @@
+/* General styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e9f7f0;
+}
+
+.hero {
+    background-image: url('earth-background.jpg');
+    background-size: cover;
+    text-align: center;
+    color: white;
+    padding: 50px 20px;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+.hero button {
+    padding: 15px 25px;
+    font-size: 1.2em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hero button:hover {
+    background-color: #45a049;
+}
+
+.calculator-section {
+    background-color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.calculator-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group input {
+    padding: 10px;
+    font-size: 1em;
+    width: 250px;
+    margin-left: 10px;
+}
+
+/* Adjust size of icons next to input fields */
+.icon {
+    width: 30px;  /* Set a fixed width */
+    height: 30px; /* Set a fixed height */
+    margin-left: 10px;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 1.2em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.result-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f0f8f7;
+}
+
+.result-section h2 {
+    font-size: 2.5em;
+}
+
+.result-section p {
+    font-size: 1.5em;
+}
+
+.result-section button {
+    background-color: #ff6347;
+}
+
+footer {
+    background-color: #2d3e50;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+footer .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+footer a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.social-media a {
+    margin: 10px;
+    color: white;
+}
