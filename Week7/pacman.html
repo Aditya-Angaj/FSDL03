@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pac-Man Game with AngularJS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .game-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            background-color: black;
+        }
+        .pac-man {
+            width: 30px;
+            height: 30px;
+            background-color: yellow;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(10, 40px);
+            gap: 2px;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            position: relative;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="pacmanApp">
+
+    <div ng-controller="PacManController">
+        <h1>Pac-Man Game</h1>
+        <div class="game-container">
+            <div class="grid">
+                <div class="cell" ng-repeat="cell in grid"></div>
+            </div>
+            <div class="pac-man" ng-style="getPacManPosition()"></div>
+        </div>
+        <p>Use arrow keys to move Pac-Man!</p>
+    </div>
+
+    <script>
+        var app = angular.module('pacmanApp', []);
+
+        app.controller('PacManController', function($scope) {
+            // Initialize game settings
+            const gridSize = 10; // 10x10 grid (100 cells)
+            $scope.grid = new Array(gridSize * gridSize); // Generate the grid (100 cells)
+
+            // Pac-Man starting position
+            $scope.pacMan = {
+                x: 0,
+                y: 0
+            };
+
+            // Event listener for arrow key controls
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "ArrowUp") {
+                    if ($scope.pacMan.y > 0) $scope.pacMan.y--;
+                } else if (event.key === "ArrowDown") {
+                    if ($scope.pacMan.y < gridSize - 1) $scope.pacMan.y++;
+                } else if (event.key === "ArrowLeft") {
+                    if ($scope.pacMan.x > 0) $scope.pacMan.x--;
+                } else if (event.key === "ArrowRight") {
+                    if ($scope.pacMan.x < gridSize - 1) $scope.pacMan.x++;
+                }
+                $scope.$apply(); // Update the view after the key press
+            });
+
+            // Function to get Pac-Man's current position as CSS
+            $scope.getPacManPosition = function() {
+                return {
+                    top: ($scope.pacMan.y * 42) + 'px', // 40px grid + 2px gap
+                    left: ($scope.pacMan.x * 42) + 'px' // 40px grid + 2px gap
+                };
+            };
+        });
+    </script>
+
+</body>
+</html>

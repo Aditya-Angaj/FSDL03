@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="studentApp">
+
+    <div ng-controller="studentController">
+        <h1>Student Record Management</h1>
+
+        <!-- Form for entering student details -->
+        <form name="studentForm" ng-submit="submitForm()" novalidate>
+            <div>
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" name="studentName" ng-model="student.name" required>
+                <span ng-show="studentForm.studentName.$touched && studentForm.studentName.$invalid" style="color:red">
+                    Name is required.
+                </span>
+            </div>
+            <div>
+                <label for="studentAge">Age:</label>
+                <input type="number" id="studentAge" name="studentAge" ng-model="student.age" min="18" max="100" required>
+                <span ng-show="studentForm.studentAge.$touched && studentForm.studentAge.$invalid" style="color:red">
+                    Age must be between 18 and 100.
+                </span>
+            </div>
+            <div>
+                <label for="studentGrade">Grade:</label>
+                <input type="text" id="studentGrade" name="studentGrade" ng-model="student.grade" required>
+                <span ng-show="studentForm.studentGrade.$touched && studentForm.studentGrade.$invalid" style="color:red">
+                    Grade is required.
+                </span>
+            </div>
+            <br>
+            <button type="submit" ng-disabled="studentForm.$invalid">Submit</button>
+        </form>
+
+        <h3>Student List:</h3>
+        <ul>
+            <li ng-repeat="student in students">
+                {{student.name}} (Age: {{student.age}}, Grade: {{student.grade}})
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // AngularJS Application
+        var app = angular.module('studentApp', []);
+
+        // Controller definition
+        app.controller('studentController', function($scope) {
+            $scope.student = {
+                name: '',
+                age: '',
+                grade: ''
+            };
+
+            $scope.students = []; // List to hold students
+
+            // Function to handle form submission
+            $scope.submitForm = function() {
+                if ($scope.studentForm.$valid) {
+                    // Push the new student record to the list
+                    $scope.students.push({
+                        name: $scope.student.name,
+                        age: $scope.student.age,
+                        grade: $scope.student.grade
+                    });
+
+                    // Reset the form
+                    $scope.student = { name: '', age: '', grade: '' };
+                    $scope.studentForm.$setPristine(); // Reset form to pristine state
+                    $scope.studentForm.$setUntouched(); // Reset form to untouched state
+                } else {
+                    alert("Form is invalid! Please fill all fields correctly.");
+                }
+            };
+        });
+    </script>
+
+</body>
+</html>
