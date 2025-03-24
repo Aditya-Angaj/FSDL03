@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Data Management System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="plantApp">
+
+    <div ng-controller="PlantController">
+        <h1>Plant Data Management System</h1>
+
+        <!-- Add Plant Form -->
+        <div>
+            <h3>Add a New Plant</h3>
+            <form ng-submit="addPlant()">
+                <label>Name:</label>
+                <input type="text" ng-model="newPlant.name" required><br>
+
+                <label>Type:</label>
+                <input type="text" ng-model="newPlant.type" required><br>
+
+                <label>Watering Frequency (days):</label>
+                <input type="number" ng-model="newPlant.waterFrequency" required><br>
+
+                <label>Last Watered Date:</label>
+                <input type="date" ng-model="newPlant.lastWatered" required><br>
+
+                <button type="submit">Add Plant</button>
+            </form>
+        </div>
+
+        <!-- Display List of Plants -->
+        <div>
+            <h3>Plant List</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Watering Frequency (days)</th>
+                        <th>Last Watered Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="plant in plants">
+                        <td>{{ plant.name }}</td>
+                        <td>{{ plant.type }}</td>
+                        <td>{{ plant.waterFrequency }}</td>
+                        <td>{{ plant.lastWatered }}</td>
+                        <td>
+                            <button ng-click="deletePlant($index)">Delete</button>
+                            <button ng-click="editPlant(plant, $index)">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Plant Modal (Optional, can be extended) -->
+        <div ng-if="isEditing">
+            <h3>Edit Plant</h3>
+            <form ng-submit="updatePlant()">
+                <label>Name:</label>
+                <input type="text" ng-model="currentPlant.name" required><br>
+
+                <label>Type:</label>
+                <input type="text" ng-model="currentPlant.type" required><br>
+
+                <label>Watering Frequency (days):</label>
+                <input type="number" ng-model="currentPlant.waterFrequency" required><br>
+
+                <label>Last Watered Date:</label>
+                <input type="date" ng-model="currentPlant.lastWatered" required><br>
+
+                <button type="submit">Update Plant</button>
+                <button type="button" ng-click="cancelEdit()">Cancel</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // Define the AngularJS module and controller
+        var app = angular.module("plantApp", []);
+
+        app.controller("PlantController", function($scope) {
+            // Initial empty plant array
+            $scope.plants = [];
+
+            // Model for adding a new plant
+            $scope.newPlant = {};
+
+            // Model for editing a plant
+            $scope.isEditing = false;
+            $scope.currentPlant = {};
+            $scope.currentIndex = -1;
+
+            // Add a new plant
+            $scope.addPlant = function() {
+                $scope.plants.push({
+                    name: $scope.newPlant.name,
+                    type: $scope.newPlant.type,
+                    waterFrequency: $scope.newPlant.waterFrequency,
+                    lastWatered: $scope.newPlant.lastWatered
+                });
+                $scope.newPlant = {}; // Reset the form
+            };
+
+            // Delete a plant
+            $scope.deletePlant = function(index) {
+                $scope.plants.splice(index, 1);
+            };
+
+            // Edit a plant
+            $scope.editPlant = function(plant, index) {
+                $scope.isEditing = true;
+                $scope.currentPlant = angular.copy(plant); // Copy plant for editing
+                $scope.currentIndex = index;
+            };
+
+            // Update a plant
+            $scope.updatePlant = function() {
+                $scope.plants[$scope.currentIndex] = angular.copy($scope.currentPlant);
+                $scope.cancelEdit();
+            };
+
+            // Cancel editing
+            $scope.cancelEdit = function() {
+                $scope.isEditing = false;
+                $scope.currentPlant = {};
+            };
+        });
+    </script>
+
+</body>
+</html>
