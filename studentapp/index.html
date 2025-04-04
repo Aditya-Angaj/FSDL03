@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <title>Student Records</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    form input,
+    form select {
+      margin-right: 10px;
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 8px 12px;
+      font-size: 14px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    // Initialize the AngularJS module
+    var app = angular.module('studentApp', []);
+
+    // Service to manage student data
+    app.service('studentService', function() {
+      var students = [];
+
+      this.getStudents = function() {
+        return students;
+      };
+
+      this.addStudent = function(student) {
+        students.push(student);
+      };
+
+      this.deleteStudent = function(index) {
+        students.splice(index, 1);
+      };
+    });
+
+    // Controller for managing the application logic
+    app.controller('studentController', function($scope, studentService) {
+      $scope.students = studentService.getStudents();
+
+      $scope.addStudent = function() {
+        if (
+          $scope.student &&
+          $scope.student.rollNo &&
+          $scope.student.name &&
+          $scope.student.age &&
+          $scope.student.department &&
+          $scope.student.year
+        ) {
+          studentService.addStudent($scope.student);
+          $scope.students = studentService.getStudents();
+          $scope.student = {};
+        } else {
+          alert("Please fill out all fields!");
+        }
+      };
+
+      $scope.deleteStudent = function(index) {
+        studentService.deleteStudent(index);
+      };
+    });
+  </script>
+</head>
+<body>
+  <div ng-controller="studentController">
+    <h1>Student Records</h1>
+    <form ng-submit="addStudent()">
+      <input type="number" ng-model="student.rollNo" placeholder="Roll Number" required />
+      <input type="text" ng-model="student.name" placeholder="Name" required />
+      <input type="number" ng-model="student.age" placeholder="Age" required />
+      <select ng-model="student.department" required>
+        <option value="" disabled selected>Select Department</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Mechanical">Mechanical</option>
+        <option value="Electrical">Electrical</option>
+        <option value="Civil">Civil</option>
+        <option value="IT">IT</option>
+      </select>
+      <select ng-model="student.year" required>
+        <option value="" disabled selected>Select Year</option>
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+      </select>
+      <button type="submit">Add Student</button>
+    </form>
+    <ul>
+      <li ng-repeat="student in students">
+        Roll No: {{student.rollNo}} - Name: {{student.name}} - Age: {{student.age}} - Department: {{student.department}} - Year: {{student.year}}
+        <button ng-click="deleteStudent($index)">Delete</button>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
