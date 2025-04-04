@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="controllers/studentController.js"></script>
+  <script src="services/studentService.js"></script>
+</head>
+<body>
+  <div ng-controller="studentController">
+    <h1>Student Records</h1>
+    <form ng-submit="addStudent()">
+      <input type="text" ng-model="student.name" placeholder="Name" required />
+      <input type="number" ng-model="student.age" placeholder="Age" required />
+      <button type="submit">Add Student</button>
+    </form>
+    <ul>
+      <li ng-repeat="student in students">
+        {{student.name}} - {{student.age}}
+        <button ng-click="deleteStudent($index)">Delete</button>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
